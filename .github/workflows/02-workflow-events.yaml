@@ -1,8 +1,20 @@
 name: 02 - workflow events
-on: push
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+    inputs:
+      run_mode:
+        description: "optional run mode"
+        required: false
+        default: "manual"
 jobs:
   echo:
-  runs-on: ubuntu-latest
-  steps:
-    - name: show the trigger
-      run: echo "a push event triggered this workflow"
+    runs-on: ubuntu-latest
+    steps:
+      - name: show the trigger
+        run: echo "a push event triggered this workflow"
